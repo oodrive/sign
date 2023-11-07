@@ -14,7 +14,7 @@ $url = $_SESSION['base_url_swagger'];
 $client = new Client(array('timeout' => 30.0));
 
 class Contract {
-    public $name = "contrat test omathieu";
+    public $name = "contrat test.pdf";
     public $contract_definition_id;
     public $vendor_email = "fo.smtpc@calindasoftware.com";
     public $message_title = "Votre contrat Z pour signature";
@@ -97,8 +97,9 @@ $payload = [
 try {
     $response = $client->request(
         'POST',
-        "$url/contracts/allinone?start=false",
-        $payload);
+        "$url/contracts/allinone?start=true",
+        $payload
+    );
 
     $resp_obj = json_decode($response->getBody()->getContents());
 
@@ -107,11 +108,15 @@ try {
     $infos['contract_id'] = $resp_obj->contract->contract_id;
     $infos['contractors'] = $resp_obj->recipients;
 
-    $resp_json = array('code' => $response->getStatusCode(), 'response' => $infos);
+    // Assuming $message contains the success message (e.g., "Contract created successfully")
+    $message = "Contract created successfully";
+
+    $resp_json = array('code' => $response->getStatusCode(), 'response' => $infos, 'message' => $message);
     echo json_encode($resp_json);
-}
-catch (RequestException $e) {
-    $resp_json = array('code' => 400, 'response' => $e->getMessage());
+} catch (RequestException $e) {
+    // If there's an error, include the error message in the response
+    $error_message = $e->getMessage();
+    $resp_json = array('code' => 400, 'response' => null, 'message' => $error_message);
     echo json_encode($resp_json);
 }
 
