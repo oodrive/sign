@@ -43,7 +43,7 @@ Install Docker Compose
 
 2.Clone the GitHub repo:
 
-git clone https://github.com/hamzaoodrive/API_integration_Sign.git
+git clone 
 
 3.Navigate to the project directory:
 
