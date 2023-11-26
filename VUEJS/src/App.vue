@@ -9,11 +9,10 @@
     <main>
       <TheWelcome />
     </main>
-    <button @click="createAndSendContract" class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-      Create and Send Contract
-    </button>
-   <!-- Your custom drop box with Dropify style -->
-   <div
+     <!-- Button to create and send contract -->
+     <button @click="createAndSendContract" class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Create and Send Contract</button>
+    <!-- Your custom drop box with Dropify style -->
+    <div
       class="dropify-wrapper"
       @dragover.prevent="handleDragOver"
       @dragenter.prevent="handleDragEnter"
@@ -27,13 +26,23 @@
         @change="handleFileInput"
         ref="dropifyInput"
         class="dropify"
-        accept=".pdf, .jpg, .png, image/jpeg, image/png,.doc , .docx , .xls, .xlsx , .ppt , .pptx"
+        accept=".pdf, .jpg, .png, image/jpeg, image/png, .doc, .docx, .xls, .xlsx, .ppt, .pptx"
         data-height="70"
         multiple
       />
     </div>
-    <input type="file" @change="handleFileInput" accept=".pdf, .jpg, .png, image/jpeg, image/png,.doc , .docx , .xls, .xlsx , .ppt , .pptx" class="mt-2" multiple />
-   
+    <div>
+    <!-- Input for appendixparts -->
+    <input
+      type="file"
+      @change="handleAppendixFileInput"
+      accept=".pdf, .jpg, .png, image/jpeg, image/png, .doc, .docx, .xls, .xlsx, .ppt, .pptx"
+      class="mt-2"
+      multiple
+    />
+    <Notification :serverResponse="serverResponse" />
+  </div>
+  
   </div>
 </template>
 
@@ -42,11 +51,15 @@ import { ref, onMounted } from 'vue';
 import { createContract } from './contractService.js';
 import 'dropify/dist/css/dropify.min.css'; // Import Dropify CSS
 import 'dropify/dist/js/dropify.min.js'; // Import Dropify JS
+import Notification from './Notification.vue';
+
 
 export default {
   setup() {
-    const storedFiles = ref([]); // Change to an array to store multiple files
+    const storedFiles = ref([]); // Change to an array to store multiple files for pdfparts
+    const appendixFiles = ref([]); // Change to an array to store multiple files for appendixparts
     const dropMessage = ref('');
+    const isAddRecipientModalOpen = ref(false);
 
     const handleDragOver = (event) => {
       event.preventDefault();
@@ -66,15 +79,21 @@ export default {
 
     const handleDrop = (event) => {
       event.preventDefault();
-      storedFiles.value = Array.from(event.dataTransfer.files); // Convert FileList to an array
+      storedFiles.value = Array.from(event.dataTransfer.files); // Convert FileList to an array for pdfparts
       console.log('Files dropped:', storedFiles.value);
       dropMessage.value = 'Files dropped successfully!';
     };
 
     const handleFileInput = (event) => {
-      storedFiles.value = Array.from(event.target.files); // Convert FileList to an array
+      storedFiles.value = Array.from(event.target.files); // Convert FileList to an array for pdfparts
       console.log('Files selected:', storedFiles.value);
       dropMessage.value = 'Files selected successfully!';
+    };
+
+    const handleAppendixFileInput = (event) => {
+      appendixFiles.value = Array.from(event.target.files); // Convert FileList to an array for appendixparts
+      console.log('Appendix files selected:', appendixFiles.value);
+      // Optionally, you can add a message for appendixparts here
     };
 
     const createAndSendContract = async () => {
@@ -85,22 +104,32 @@ export default {
 
       try {
         if (!storedFiles.value.length) {
-          console.error('No files selected.');
+          console.error('No files for the contract are selected.');
           return;
         }
 
-        // Pass the array of files to the createContract function
-        const response = await createContract(token, cdi, contractorId, actorId, storedFiles.value);
+        let response;
+
+        if (appendixFiles.value && appendixFiles.value.length) {
+          // If appendixFiles is provided, include it in the createContract call
+          response = await createContract(token, cdi, contractorId, actorId, storedFiles.value, appendixFiles.value);
+        } else {
+          // If appendixFiles is not provided, call createContract without it
+          response = await createContract(token, cdi, contractorId, actorId, storedFiles.value);
+        }
+
         console.log('Contract created:', response);
 
         // Clear message and selected files after creating and sending the contract
         dropMessage.value = '';
         storedFiles.value = [];
+        appendixFiles.value = [];
       } catch (error) {
         console.error('Error creating contract:', error.message);
       }
     };
 
+     
     onMounted(() => {
       // Initialize Dropify after the component is mounted
       $('.dropify').dropify();
@@ -114,6 +143,7 @@ export default {
 
     return {
       storedFiles,
+      appendixFiles,
       dropMessage,
       createAndSendContract,
       handleDragOver,
@@ -121,11 +151,15 @@ export default {
       handleDragLeave,
       handleDrop,
       handleFileInput,
+      handleAppendixFileInput,
+      
     };
   },
+  
 };
-</script>
 
+
+</script>
 
 <style scoped>
 @import 'dropify/dist/css/dropify.css';

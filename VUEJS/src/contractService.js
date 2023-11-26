@@ -1,11 +1,10 @@
-// contractService.js
-
 import axios from 'axios';
 
 const apiUrl = '/api';  // Use the proxy path
 
-export const createContract = async (token, cdi, contractor_id, actor_id, files) => {
-  console.log('Received FormData:', files);
+export const createContract = async (token, cdi, contractor_id, actor_id, pdfParts, appendixParts) => {
+  console.log('Received FormData (pdfParts):', pdfParts);
+  console.log('Received FormData (appendixParts):', appendixParts);
 
   const contract = {
     name: "contrat test VUE JS.pdf",
@@ -42,15 +41,26 @@ export const createContract = async (token, cdi, contractor_id, actor_id, files)
   formData.append('contract', JSON.stringify(contract));
   formData.append('recipients', JSON.stringify(recipients));
 
-  // Ensure that files is an array before attempting to iterate
-  if (Array.isArray(files)) {
-    // Append each file to the FormData
-    for (const file of files) {
+  // Ensure that pdfParts is an array before attempting to iterate
+  if (Array.isArray(pdfParts)) {
+    // Append each pdfPart to the FormData
+    for (const file of pdfParts) {
       formData.append('pdfparts', file);
     }
   } else {
-    // If it's not an array, treat it as a single file
-    formData.append('pdfparts', files);
+    // If it's not an array, treat it as a single pdfPart
+    formData.append('pdfparts', pdfParts);
+  }
+
+  // Ensure that appendixParts is an array before attempting to iterate
+  if (Array.isArray(appendixParts)) {
+    // Append each appendixPart to the FormData
+    for (const file of appendixParts) {
+      formData.append('appendixparts', file);
+    }
+  } else {
+    // If it's not an array, treat it as a single appendixPart
+    formData.append('appendixparts', appendixParts);
   }
 
   try {
