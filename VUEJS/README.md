@@ -17,11 +17,13 @@ See [Vite Configuration Reference](https://vitejs.dev/config/).
 npm install
 ```
 # Install jQuery
+```sh
 npm install jquery
-
+```
 # Install Dropify
+```sh
 npm install dropify
-
+```
 ### Compile and Hot-Reload for Development
 
 ```sh
