@@ -16,7 +16,7 @@ export async function createAndSendContract(files) {
     });
 
     const response = await createContract(token, cdi, contractorId, actorId, formData);
-    console.log('Contract created:', response);
+    console.log('Contract created 12358:', response);
   } catch (error) {
     console.error('Error creating contract:', error.message);
   }

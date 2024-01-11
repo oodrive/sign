@@ -1,7 +1,13 @@
+
+//contractService.js
 import axios from 'axios';
 
 const apiUrl = '/api';  // Use the proxy path
-
+// Shared state object to store contract ID and status
+const contractState = {
+  contractId: null,
+  status: null,
+};
 export const createContract = async (token, cdi, contractor_id, actor_id, pdfParts, appendixParts) => {
   console.log('Received FormData (pdfParts):', pdfParts);
   console.log('Received FormData (appendixParts):', appendixParts);
@@ -67,12 +73,35 @@ export const createContract = async (token, cdi, contractor_id, actor_id, pdfPar
     const response = await axios.post(apiUrl + "/contracts/allinone?start=true", formData, {
       headers: {
         'Accept': 'application/json',
+        'Content-Type': 'multipart/form-data',
         'j_token': token
       },
       responseType: 'json',
     });
 
-    console.log('Response:', response.data);
+    console.log('Contract created: ============222===========');
+    console.log(response.data); // Log the entire response to inspect its structure
+    
+    const contract_id = response.data.contract.contract_id; // Access the contract_id property correctly
+    
+    const status = response.data.contract.status;
+    
+    console.log('Contract ID:', contract_id);
+    console.log('status:', status);
+    // Store the contract ID and status in the shared state object
+    contractState.contractId = contract_id;
+    contractState.status = status;
+   
+  if (response.data.recipients && Array.isArray(response.data.recipients)) {
+    const recipients = response.data.recipients;
+    recipients.forEach((recipient, index) => {
+      const recipient_id = recipient.id;
+      console.log(`Recipient ${index + 1} ID:`, recipient_id);
+    });
+    contractState.recipient_id = recipients;
+  } else {
+    console.log('Invalid recipients data in the response');
+  }
   } catch (error) {
     if (error.response) {
       // The request was made, but the server responded with a status code
@@ -87,4 +116,13 @@ export const createContract = async (token, cdi, contractor_id, actor_id, pdfPar
     }
     throw new Error('Error creating contract');
   }
+};
+// Function to retrieve the contract ID from the shared state object
+export const getContractId = () => {
+  return contractState.contractId;
+};
+
+// Function to retrieve the status from the shared state object
+export const getStatus = () => {
+  return contractState.status;
 };
