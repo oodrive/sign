@@ -4,7 +4,7 @@
     <Header/>
      
     <div class="button-container">
-      <Buttons :stored-files="storedFiles" :appendix-files="appendixFiles" @update-message="updateMessage" />  <Footer />
+      <Buttons :stored-files="storedFiles" :appendix-files="appendixFiles" @update-message="updateMessage" />  <Status />
       <FileUpload @update-files="updateFiles" @update-appendix="updateAppendix" /> 
     </div>
     <AddAppendix />
@@ -23,7 +23,7 @@ import { ref, onMounted } from 'vue';
 //import { createContract } from './contractService.js';
 import 'dropify/dist/css/dropify.min.css'; // Import Dropify CSS
 import 'dropify/dist/js/dropify.min.js'; // Import Dropify JS
-import Footer from './components/Footer.vue';
+import Status from './components/Status.vue';
 import Buttons from './components/Buttons.vue';
 import Header from './components/Header.vue';
 import FileUpload from './components/FileUpload.vue';
@@ -32,7 +32,7 @@ import FileUpload from './components/FileUpload.vue';
 export default {
   components: {
     Header,
-    Footer,
+    Status,
     Buttons,
     FileUpload,
     //ModalRecipents
