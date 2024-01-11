@@ -33,7 +33,7 @@ npm run dev
 ## Proxy Setup in a new terminal 
 ```sh
 cd backend
-npm int -y
+npm init -y
 npm run serve:proxy
 ```
 
