@@ -1,0 +1,19 @@
+version: '3'
+services:
+  frontend:
+    build: .  # Specify the directory containing the frontend Dockerfile
+    ports:
+      - "8080:8080"  # Expose port 8080
+    volumes:
+      - .:/app
+      - ../VUEJS/.env:/app/.env  # Mount the directory containing .env file
+    depends_on:
+      - backend  # Ensure backend service is started first
+
+  backend:
+    build: ./backend  # Specify the directory containing the backend Dockerfile
+    ports:
+      - "5171:5171"  # Example port for backend service
+    volumes:
+      - ./backend:/app
+      - ../VUEJS/.env:/app/.env  # Mount the same directory for backend
