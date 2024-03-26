@@ -22,7 +22,7 @@
             <textarea id="messageBody" v-model="contract.message_body"></textarea>
           </div>
           <div class="form-group">
-            <label for="autoClose">Auto Close:</label>
+            <label for="autoClose">Contre-signature automatique :</label>
             <label class="switch">
               <input type="checkbox" id="autoClose" v-model="autoCloseCheckbox">
               <span class="slider"></span>
@@ -73,6 +73,7 @@
             <option value="">Select Signature Mode</option>
             <option value="10">Face to Face PAD</option>
             <option value="9">Face to Face OTP</option>
+            <option value="11">Email+OTP</option>
           </select>
           </div>
           <button type="button" @click="addRecipient" class="btn btn-secondary">Add Another Recipient</button>

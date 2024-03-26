@@ -1,9 +1,9 @@
-
+# Dockerfile for backend
 
 # Use the official Node.js image as the base image
 FROM node:14
 
-# Set the working directory inside the container
+# Set the working directory in the container
 WORKDIR /app
 
 # Copy package.json and package-lock.json to the working directory
@@ -12,14 +12,14 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 
-# Copy the rest of the files
+# Copy the rest of the application code to the working directory
 COPY . .
 
-# Copy .env file from the root directory
-COPY ../VUEJS/.env ./
+# Copy .env file to the working directory
+COPY ../../../.env .     
 
-# Expose the port that your Express.js server runs on
+# Expose the port on which the server will run
 EXPOSE 5171
 
-# Set the default command to run your Express.js server
+# Command to run the server
 CMD ["npm", "start"]
