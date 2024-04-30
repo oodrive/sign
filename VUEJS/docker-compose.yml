@@ -1,21 +1,25 @@
 version: '3'
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> ce326e6bc3a5a1624c63b776bb6ba1fab3d1d33c
 services:
   frontend:
-    build: .  # Specify the directory containing the frontend Dockerfile
-    ports:
-      - "8080:8080"  # Expose port 8080
+    build:
+      context: .
+      dockerfile: Dockerfile
     volumes:
-      - .:/app
-      - ../VUEJS/.env:/app/.env  # Mount the directory containing .env file
-    depends_on:
-      - backend  # Ensure backend service is started first
+      - ../VUEJS/.env:/.env  # Mount .env file into the frontend container
+    ports:
+      - "5173:5173"  # Map port 5173 of the container to port 5173 on the host
 
   backend:
-    build: ./backend  # Specify the directory containing the backend Dockerfile
-    ports:
-      - "5171:5171"  # Example port for backend service
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
     volumes:
+<<<<<<< HEAD
       - ./backend:/app
       - ../VUEJS/.env:/app/.env  # Mount the same directory for backend
 =======
@@ -35,11 +39,14 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     volumes:
+=======
+>>>>>>> ce326e6bc3a5a1624c63b776bb6ba1fab3d1d33c
       - ../VUEJS/.env:/.env  # Mount .env file into the backend container
     ports:
       - "5171:5171"  # Map port 5171 of the container to port 5171 on the host
     depends_on:
       - frontend
+<<<<<<< HEAD
 
   prometheus:
     image: prom/prometheus
@@ -63,3 +70,5 @@ networks:
   monitoring:
     driver: bridge
 >>>>>>> Newway
+=======
+>>>>>>> ce326e6bc3a5a1624c63b776bb6ba1fab3d1d33c

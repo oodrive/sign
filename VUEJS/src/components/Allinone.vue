@@ -23,10 +23,14 @@
           </div>
           <div class="form-group">
 <<<<<<< HEAD
+<<<<<<< HEAD
             <label for="autoClose">Auto Close:</label>
 =======
             <label for="autoClose">Contre-signature automatique :</label>
 >>>>>>> Newway
+=======
+            <label for="autoClose">Contre-signature automatique :</label>
+>>>>>>> ce326e6bc3a5a1624c63b776bb6ba1fab3d1d33c
             <label class="switch">
               <input type="checkbox" id="autoClose" v-model="autoCloseCheckbox">
               <span class="slider"></span>
@@ -44,13 +48,9 @@
           </div>
           <!-- Civility dropdown -->
         <div class="form-group">
-<<<<<<< HEAD
           <label for="civility">Civility:</label>
-          <select id="civility" v-model="recipient.civility">
-=======
-          <label for="civility" >Civility:</label>
-          <select id="civility" v-model="recipient.civility" :required="!recipient.id"  >
->>>>>>> Newway
+<select id="civility" v-model="recipient.civility" :required="!recipient.id">
+
             <option value="">Select Civility</option>
             <option value="MONSIEUR">MONSIEUR</option>
             <option value="MADAME">MADAME</option>
@@ -83,9 +83,13 @@
             <option value="10">Face to Face PAD</option>
             <option value="9">Face to Face OTP</option>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
             <option value="11">Email+OTP</option>
 >>>>>>> Newway
+=======
+            <option value="11">Email+OTP</option>
+>>>>>>> ce326e6bc3a5a1624c63b776bb6ba1fab3d1d33c
           </select>
           </div>
           <button type="button" @click="addRecipient" class="btn btn-secondary">Add Another Recipient</button>

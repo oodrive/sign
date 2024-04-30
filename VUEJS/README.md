@@ -53,3 +53,10 @@ npm run serve:proxy
 ```sh
 npm run build
 ```
+### if you want to run the project with Docker follow these steps :
+change the vite config of the target proxy .see coment in vite.config.json
+Run 
+```sh
+docker-compose up --build
+```
+to build the Docker images and start the containers.
