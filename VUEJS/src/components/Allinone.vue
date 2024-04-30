@@ -22,7 +22,11 @@
             <textarea id="messageBody" v-model="contract.message_body"></textarea>
           </div>
           <div class="form-group">
+<<<<<<< HEAD
             <label for="autoClose">Auto Close:</label>
+=======
+            <label for="autoClose">Contre-signature automatique :</label>
+>>>>>>> Newway
             <label class="switch">
               <input type="checkbox" id="autoClose" v-model="autoCloseCheckbox">
               <span class="slider"></span>
@@ -40,8 +44,13 @@
           </div>
           <!-- Civility dropdown -->
         <div class="form-group">
+<<<<<<< HEAD
           <label for="civility">Civility:</label>
           <select id="civility" v-model="recipient.civility">
+=======
+          <label for="civility" >Civility:</label>
+          <select id="civility" v-model="recipient.civility" :required="!recipient.id"  >
+>>>>>>> Newway
             <option value="">Select Civility</option>
             <option value="MONSIEUR">MONSIEUR</option>
             <option value="MADAME">MADAME</option>
@@ -73,6 +82,10 @@
             <option value="">Select Signature Mode</option>
             <option value="10">Face to Face PAD</option>
             <option value="9">Face to Face OTP</option>
+<<<<<<< HEAD
+=======
+            <option value="11">Email+OTP</option>
+>>>>>>> Newway
           </select>
           </div>
           <button type="button" @click="addRecipient" class="btn btn-secondary">Add Another Recipient</button>

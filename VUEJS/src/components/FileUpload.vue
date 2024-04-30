@@ -1,8 +1,13 @@
 // 3. FileUpload.vue
 
+<<<<<<< HEAD
 <template >
   
   <div  
+=======
+<template>
+  <div
+>>>>>>> Newway
     class="dropify-wrapper"
     @dragover.prevent="handleDragOver"
     @dragenter.prevent="handleDragEnter"
@@ -12,7 +17,11 @@
     <p v-if="dropMessage" class="text-green-500"> <br/> {{ dropMessage }}</p>
     <p v-else class="text-gray-500"> <br/> 
     Glisser/déposer votre document ici pour débuter
+<<<<<<< HEAD
     <h6>  <br/> Taille max : 50 Mo - Format : PDF, DOCX ou PPTX</h6>
+=======
+    <h6> <br/> Taille max : 50 Mo - Format : PDF, DOCX ou PPTX</h6>
+>>>>>>> Newway
      </p>
       
     <input
