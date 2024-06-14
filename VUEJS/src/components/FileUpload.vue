@@ -1,7 +1,8 @@
 // 3. FileUpload.vue
 
-<template>
-  <div
+<template >
+  
+  <div  
     class="dropify-wrapper"
     @dragover.prevent="handleDragOver"
     @dragenter.prevent="handleDragEnter"
@@ -11,7 +12,7 @@
     <p v-if="dropMessage" class="text-green-500"> <br/> {{ dropMessage }}</p>
     <p v-else class="text-gray-500"> <br/> 
     Glisser/déposer votre document ici pour débuter
-    <h6> <br/> Taille max : 50 Mo - Format : PDF, DOCX ou PPTX</h6>
+    <h6>  <br/> Taille max : 50 Mo - Format : PDF, DOCX ou PPTX</h6>
      </p>
       
     <input

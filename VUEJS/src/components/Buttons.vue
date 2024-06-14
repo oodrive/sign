@@ -1,5 +1,5 @@
 <template>
-  <button @click="createAndSendContract" class="create-contract-btn">Créer et envoyer un contrat</button>
+  <button @click="createAndSendContract" class="create-contract-btn">Créer contrat</button>
 </template>
 
 <script>
