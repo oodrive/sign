@@ -83,25 +83,14 @@
   </template>
   
   <script>
+import ContractDTO from '../dtos/ContractDTO';
+import RecipientDTO from '../dtos/RecipientDTO';
 
 export default {
   data() {
     return {
-      contract: {
-        name: '',
-        message_title: '',
-        message_body: '',
-        auto_close: 0,
-      },
-      recipient: {
-        id: '',
-        civility: '',
-        firstname: '',
-        lastname: '',
-        cell_phone: '',
-        email: '',
-        signature_mode: '',
-      },
+      contract:new ContractDTO(),
+      recipient: new RecipientDTO(),
       recipients: [],
       contract: {},
       showRecipientForm: false,

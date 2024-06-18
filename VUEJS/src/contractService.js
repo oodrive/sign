@@ -1,4 +1,4 @@
-// contractService.js path : c:/Users/h.ayari/Desktop/vueJS integration/sign/VUEJS/src/contractService.js
+// contractService.js  
 
 import axios from 'axios';
 import { filteredContract, filteredRecipients  } from './components/Allinone.vue';
